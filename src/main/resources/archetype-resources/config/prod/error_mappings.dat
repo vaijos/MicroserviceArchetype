@@ -1,0 +1,12 @@
+#Legacy_Code|Micro_code| Title |Detail|Ecat|Elevel|HtttpStatus
+131000|132000|User is not a valid customer of the product.|User is not a valid customer of the product.|debugcat|level5|500|
+131029|132029|Teminated User Or Invalid Token |Teminated User Or Invalid token|debugcat|level5|500|
+131185|132185|The Token has exceeded it's allowed time.|Expired token or missing jwt|debugcat|level5|401|
+131187|132187|Invalid Token|Token is Invalid|debugcat|level5|401|
+131483|132483|Incomplete authorization |Privacy Policy Not Accepted|debugcat|level5|401|
+131183|132183|Token is invalid|Token is invalid.|debugcat|level5|401|
+131035|132035|User is registered but not active|User is registered but not active.|debugcat|level5|404|
+167000|16700|Could not map to a transaction|Could not map to a transaction.|debugcat|level5|500|
+400|400|Invalid request parameter|Invalid request parameter.|debugcat|level5|500|
+500|500|Internal Server Error|Server encountered an unexpected condition|debugcat|level5|500|
+503|503|Service Unavailable|Server is currently unable to handle the request|debugcat|level5|500|

@@ -1,0 +1,101 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "${artifactId}",
+        "version": "0.3.2.6",
+        "title": "${artifactId}",
+        "termsOfService": "http://www.dowjones.com/tos.html",
+        "contact": {
+            "name": "Teamperseus@dowjones.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.dowjones.com/licenses/LICENSE.html"
+        }
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/swagger": {
+            "get": {
+                "summary": "Get swagger json",
+                "description": "Use for swagger viewer endpoint",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request - Incorrect Parameters",
+                        "schema": {
+                            "$ref": "#/definitions/common_error_response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - No resource found for the request",
+                        "schema": {
+                            "$ref": "#/definitions/common_error_response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error - Server encountered an unexpected condition",
+                        "schema": {
+                            "$ref": "#/definitions/common_error_response"
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable - Server is currently unable to handle the request",
+                        "schema": {
+                            "$ref": "#/definitions/common_error_response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "common_error_object": {
+            "type": "object",
+            "required": [
+                "code",
+                "title",
+                "status"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "detail": {
+                    "type": "string"
+                },
+                "meta": {
+                    "type": "string"
+                }
+            }
+        },
+        "common_error_response": {
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/common_error_object"
+                    }
+                }
+            }
+        }
+    }
+}

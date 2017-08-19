@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="LOG_DIR" value="/var/www/v_running/logs"/>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{MMM dd HH:mm:ss} ${INSTANCEID} ${artifactId}Service-${ENV}: host=${HOSTNAME}; modname=GatekeeperService; %msg *%level* Thread[%t] class=%logger LineNume=%line"%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_DIR}/${artifactId}Service.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{MMM dd HH:mm:ss} ${INSTANCEID} ${artifactId}Service-${ENV}: host=${HOSTNAME}; modname=GatekeeperService; %msg *%level* Thread[%t] class=%logger LineNume=%line"%n
+			</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover hourly -->
+			<fileNamePattern>${LOG_DIR}/${artifactId}Service.%d{yyyy-MM-dd_HH}.%i.log </fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy	class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>48</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="EOCWATCHLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_DIR}/${artifactId}Service_watch.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{MMM dd HH:mm:ss} ${INSTANCEID} ${artifactId}Service-${ENV}: host=${HOSTNAME}; modname=GatekeeperService; %msg *%level* Thread[%t] class=%logger LineNume=%line"%n
+			</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover hourly -->
+			<fileNamePattern>${LOG_DIR}/${artifactId}Service_watch.%d{yyyy-MM-dd_HH}.%i.log </fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy	class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>48</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="${package}" level="debug" additivity="false">
+		<appender-ref ref="FILE"/>
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="EOCWATCHLOG"/>
+	</logger>
+
+	<logger name="com.dowjones.mshared.core" level="debug" additivity="false">
+		<appender-ref ref="FILE"/>
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="EOCWATCHLOG"/>
+	</logger>
+
+	<root level="error">
+		<appender-ref ref="EOCWATCHLOG"/>
+		<appender-ref ref="STDOUT"/>
+	</root>
+
+</configuration>
